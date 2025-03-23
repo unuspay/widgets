@@ -296,7 +296,7 @@ export default (props)=>{
     if(transaction.blockchain === 'solana') { // ensure solana transaction tracking uses only a single nonce for further processing
       transaction.nonce = await getNonce({ transaction, account, wallet })
     }
-    storePayment(transaction, afterBlock, paymentRoute, deadline)
+    //storePayment(transaction, afterBlock, paymentRoute, deadline)
     if(synchronousTracking || (track && track.async == true)) {
       startTracking(transaction, afterBlock, paymentRoute, deadline)
     }
