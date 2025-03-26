@@ -156,17 +156,23 @@ export default (props)=>{
       transaction: transaction.id,
       sender: transaction.from,
       nonce: await getNonce({ transaction, account, wallet }),
-      after_block: afterBlock.toString(),
-      from_token: paymentRoute.fromToken.address,
-      from_amount: paymentRoute.fromAmount.toString(),
-      from_decimals: paymentRoute.fromDecimals,
-      to_token: paymentRoute.toToken.address,
-      to_amount: paymentRoute.toAmount.toString(),
-      to_decimals: paymentRoute.toDecimals,
-      fee_amount: paymentRoute?.feeAmount?.toString(),
-      trace_attempt_id: attemptIdRef.current,
-      deadline,
-      selected_wallet: wallet?.name
+      afterBlock: afterBlock.toString(),
+        fromTokens:[{
+            token: paymentRoute.fromToken.address,
+            decimals: paymentRoute.fromDecimals,
+            amount: paymentRoute.fromAmount.toString(),
+            swapToToken: paymentRoute.toToken.address,
+            swapToDecimals: paymentRoute.toDecimals,
+        }],
+        toTokens:[{
+            token: paymentRoute.toToken.address,
+            decimals: paymentRoute.toDecimals,
+            amount: paymentRoute.toAmount.toString(),
+            feeAmount: paymentRoute?.feeAmount?.toString(),
+        }]
+       ,
+        deadline,
+        wallet: wallet?.name
     })
       .then((response)=>{
         setTrackingInitialized(true)
@@ -320,16 +326,23 @@ export default (props)=>{
         blockchain: paymentRoute.blockchain,
         sender: account,
         nonce: await getNonce({ blockchain: paymentRoute.blockchain, transaction, account, wallet }),
-        after_block: afterBlock.toString(),
-        from_token: paymentRoute.fromToken.address,
-        from_amount: paymentRoute.fromAmount.toString(),
-        from_decimals: paymentRoute.fromDecimals,
-        to_token: paymentRoute.toToken.address,
-        to_amount: paymentRoute.toAmount.toString(),
-        to_decimals: paymentRoute.toDecimals,
-        fee_amount: paymentRoute?.feeAmount?.toString(),
+        afterBlock: afterBlock.toString(),
+        fromTokens:[{
+            token: paymentRoute.fromToken.address,
+            decimals: paymentRoute.fromDecimals,
+            amount: paymentRoute.fromAmount.toString(),
+            swapToToken: paymentRoute.toToken.address,
+            swapToDecimals: paymentRoute.toDecimals,
+        }],
+        toTokens:[{
+            token: paymentRoute.toToken.address,
+            decimals: paymentRoute.toDecimals,
+            amount: paymentRoute.toAmount.toString(),
+            feeAmount: paymentRoute?.feeAmount?.toString(),
+        }]
+       ,
         deadline,
-        selected_wallet: wallet?.name
+        wallet: wallet?.name
       }
       if(configurationId){
         return fetch(`https://public.depay.com/configurations/${configurationId}/attempts`, {
