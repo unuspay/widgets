@@ -121,3 +121,4 @@ tmp/
 
 cypress/videos
 cypress/screenshots
+dist
