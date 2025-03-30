@@ -105,7 +105,7 @@ export default ()=>{
     } else if(release) {
       return(
         <div>
-          <a className="Card transparent small" title="DePay has validated the payment" href={ link({ url: `https://status.depay.com/tx/${transaction.blockchain}/${transaction.id}`, target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer">
+          <a className="Card transparent small" title="UnusPay has validated the payment" href={ link({ url: transaction?.url, target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer">
             <div className="CardImage">
               <div className="TextCenter Opacity05">
                 <Checkmark className="small"/>
