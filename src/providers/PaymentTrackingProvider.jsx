@@ -55,7 +55,7 @@ export default (props)=>{
   const { setClosable } = useContext(ClosableContext)
   const { navigate, set } = useContext(NavigateContext)
 
-  const openSocket = (transaction)=>{
+  /* const openSocket = (transaction)=>{
     let socket = new WebSocket('wss://integrate.depay.com/cable')
     socket.onopen = async function(event) {
       const msg = {
@@ -100,7 +100,7 @@ export default (props)=>{
     socket.onerror = function(error) {
       console.log('WebSocket Error: ', error)
     }
-  }
+  } */
 
   const retryStartTracking = (transaction, afterBlock, paymentRoute, deadline, attempt)=> {
     attempt = parseInt(attempt || 1, 10)
@@ -118,31 +118,21 @@ export default (props)=>{
   }
 
   const callTracking = (payment)=>{
-    if(configurationId){
-      return fetch(`https://public.depay.com/configurations/${configurationId}/attempts`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payment)
-      }).then((response)=>{
-        if(response.status == 200 || response.status == 201) {
-          response.json().then((attempt)=>setAttemptId(attempt.id))
-          return response
-        } else {
-          return reject('TRACKING REQUEST FAILED')
-        }
-      })
-    } else if(track.endpoint){
-      return fetch(track.endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payment)
-      }).then((response)=>{
-        if(response.status == 200 || response.status == 201) {
-          return response
-        } else {
-          throw('TRACKING REQUEST FAILED', response)
-        }
-      })
+    
+    if(track.endpoint && track.id){
+        payment.orderId=track.id;
+        return fetch(track.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payment)
+        }).then((response)=>response.json()).then((response)=>{
+            if(response.code == 200){
+                return response
+            }else {
+                return reject('TRACING REQUEST FAILED')
+            }
+           
+        }).catch(error => {return reject('TRACING REQUEST FAILED')});
     } else if (track.method) {
       return track.method(payment)
     } else {
@@ -155,6 +145,7 @@ export default (props)=>{
       blockchain: transaction.blockchain,
       transaction: transaction.id,
       sender: transaction.from,
+      receiver: paymentRoute.toAddress,
       nonce: await getNonce({ transaction, account, wallet }),
       afterBlock: afterBlock.toString(),
         fromTokens:[{
@@ -205,14 +196,13 @@ export default (props)=>{
         setRelease(true)
       }
     }
-
+     
     const performedPayment = {
       blockchain: transaction.blockchain,
       transaction: transaction.id,
       sender: transaction.from,
       nonce: await getNonce({ transaction, account, wallet }),
-      after_block: afterBlock.toString(),
-      to_token: paymentRoute.toToken.address
+      afterBlock: afterBlock.toString()
     }
 
     if(configurationId) {
@@ -228,18 +218,18 @@ export default (props)=>{
           }
         }).then(handlePollingResponse)
       }
-    } else if(track.poll.endpoint) {
+    } else if(track.poll.endpoint && track.id) {
+        performedPayment.orderId=track.id
       fetch(track.poll.endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(performedPayment)
-      }).then((response)=>{
-        if(response.status == 200 || response.status == 201) {
-          return response.json().catch(()=>{ setClosable(true) })
-        } else {
-          return undefined
-        }
-      }).then(handlePollingResponse)
+        
+      }).then(response=>response.json()).then((response)=>{
+        if(response.code == 200) {
+            handlePollingResponse(response.data)
+        } 
+      })
     } else if(track.poll.method) {
       track.poll.method(performedPayment).then(handlePollingResponse)
     }
@@ -258,7 +248,7 @@ export default (props)=>{
     return ()=>{ clearInterval(pollingInterval) }
   }, [polling, transaction, afterBlock, attemptId, paymentRoute])
 
-  const storePayment = async(transaction, afterBlock, paymentRoute, deadline)=>{
+  /* const storePayment = async(transaction, afterBlock, paymentRoute, deadline)=>{
     fetch('https://public.depay.com/payments', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
@@ -296,7 +286,7 @@ export default (props)=>{
     .catch((error)=>{
       setTimeout(()=>{ storePayment(transaction, afterBlock, paymentRoute, deadline) }, 3000)
     })
-  }
+  } */
 
   const initializeTracking = async(transaction, afterBlock, paymentRoute, deadline)=>{
     if(transaction.blockchain === 'solana') { // ensure solana transaction tracking uses only a single nonce for further processing
@@ -311,7 +301,7 @@ export default (props)=>{
     setTransaction(transaction)
     setAfterBlock(afterBlock)
     setPaymentRoute(paymentRoute)
-    openSocket(transaction)
+    //openSocket(transaction)
   }
 
   const trace = (afterBlock, paymentRoute, transaction, deadline)=>{
@@ -320,11 +310,12 @@ export default (props)=>{
     setDeadline(deadline)
     setAfterBlock(afterBlock)
     setPaymentRoute(paymentRoute)
-    openSocket(transaction)
+    //openSocket(transaction)
     return new Promise(async(resolve, reject)=>{
       let performedPayment = {
         blockchain: paymentRoute.blockchain,
         sender: account,
+        receiver: paymentRoute.toAddress,
         nonce: await getNonce({ blockchain: paymentRoute.blockchain, transaction, account, wallet }),
         afterBlock: afterBlock.toString(),
         fromTokens:[{
@@ -344,31 +335,20 @@ export default (props)=>{
         deadline,
         wallet: wallet?.name
       }
-      if(configurationId){
-        return fetch(`https://public.depay.com/configurations/${configurationId}/attempts`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(performedPayment)
-        }).then((response)=>{
-          if(response.status == 200 || response.status == 201) {
-            response.json().then((attempt)=>setAttemptId(attempt.id))
-            return resolve()
-          } else {
-            return reject('TRACING REQUEST FAILED')
-          }
-        })
-      } else if(track.endpoint){
+      if(track.endpoint && track.id){
+        performedPayment.orderId=track.id;
         return fetch(track.endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(performedPayment)
-        }).then((response)=>{
-          if(response.status == 200 || response.status == 201) {
-            return resolve()
-          } else {
-            return reject('TRACING REQUEST FAILED')
-          }
-        })
+        }).then((response)=>response.json()).then((response)=>{
+            if(response.code == 200){
+                return resolve()
+            }else {
+                return reject('TRACING REQUEST FAILED')
+            }
+           
+        }).catch(error => {return reject('TRACING REQUEST FAILED')});
       } else if (track.method) {
         track.method(performedPayment).then(resolve).catch(reject)
       } else {

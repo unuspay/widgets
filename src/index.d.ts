@@ -70,6 +70,7 @@ declare namespace DePayWidgets {
     connected?: (address: string) => void;
     closed?: () => void;
     track?: {
+        id: string;
       endpoint?: string;
       method?: (payment: any) => void;
       poll?: {

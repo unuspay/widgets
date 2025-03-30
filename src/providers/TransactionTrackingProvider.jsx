@@ -102,11 +102,11 @@ export default (props)=>{
   }
 
   const initializeTracking = (transaction, afterBlock, deadline)=>{
-    if(!supported.evm.includes(transaction.blockchain)){ return }
+    /* if(!supported.evm.includes(transaction.blockchain)){ return }
     setGivenTransaction(transaction)
     if(recover == undefined) { createTracking(transaction, afterBlock, deadline, 1) }
     openSocket(transaction)
-    setPolling(true)
+    setPolling(true) */
   }
 
   useEffect(()=>{
