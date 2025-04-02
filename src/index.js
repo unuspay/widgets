@@ -6,7 +6,7 @@ import Payment from './Payment'
 import Sale from './Sale'
 import Select from './Select'
 
-let DePayWidgets = {
+let UnusPayWidgets = {
   Connect,
   Login,
   Payment,
@@ -16,4 +16,4 @@ let DePayWidgets = {
   allWallets,
 }
 
-export default DePayWidgets
+export default UnusPayWidgets

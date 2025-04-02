@@ -2,7 +2,7 @@
   "name": "@depay/widgets-solana",
   "moduleName": "DePayWidgets",
   "version": "12.18.3",
-  "description": "Web3 Payments with any token. DePay simplifies and improves Web3 Payments with the power of DeFi. Accept any token with on-the-fly conversion.",
+  "description": "Web3 Payments with any token. UnusPay simplifies and improves Web3 Payments with the power of DeFi. Accept any token with on-the-fly conversion.",
   "main": "./dist/umd/index.js",
   "module": "./dist/esm/index.js",
   "files": [
@@ -18,8 +18,8 @@
     "crypto",
     "cryptocurrencies"
   ],
-  "author": "depay.com",
-  "homepage": "https://depay.com",
+  "author": "unuspay.com",
+  "homepage": "https://unuspay.com",
   "license": "MIT",
   "dependencies": {
     "@depay/coinbase-wallet-sdk": "^3.8.4",

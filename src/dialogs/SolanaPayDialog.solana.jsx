@@ -196,8 +196,8 @@ export default (props)=> {
           data: JSON.stringify({
             type: 'create',
             secret_id: secretId,
-            label: document.title || 'DePay',
-            icon: getFavicon() || 'https://depay.com/favicon.png',
+            label: document.title || 'UnusPay',
+            icon: getFavicon() || 'https://unuspay.com/favicon.png',
             token: selectedPaymentOption.token,
             payment_receiver: selectedPaymentOption.receiver,
             payment_amount: selectedPaymentOption.fromAmountBN.toString(),

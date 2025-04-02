@@ -124,7 +124,7 @@ export default ()=>{
     } else {
       return(
         <div>
-          <a className="Card transparent small" title="DePay is validating the payment" href={ link({ url: `https://status.depay.com/tx/${transaction.blockchain}/${transaction.id}`, target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer">
+          <a className="Card transparent small" title="UnusPay is validating the payment"  href={ link({ url: transaction?.url, target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer">
             <div className="CardImage">
               <div className="TextCenter">
                 <div className="Loading Icon"></div>

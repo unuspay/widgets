@@ -1,4 +1,4 @@
-declare namespace DePayWidgets {
+declare namespace UnusPayWidgets {
 
   interface ColorsOptions {
     primary?: string;
@@ -186,13 +186,13 @@ declare namespace DePayWidgets {
   const Loading: (options: LoadingOptions) => Promise<any>;
 }
 
-declare const DePayWidgets: {
-  Connect: DePayWidgets.Connect;
-  Login: DePayWidgets.Login;
-  Payment: DePayWidgets.Payment;
-  Sale: DePayWidgets.Sale;
-  Select: DePayWidgets.Select;
-  Loading: DePayWidgets.Loading;
+declare const UnusPayWidgets: {
+  Connect: UnusPayWidgets.Connect;
+  Login: UnusPayWidgets.Login;
+  Payment: UnusPayWidgets.Payment;
+  Sale: UnusPayWidgets.Sale;
+  Select: UnusPayWidgets.Select;
+  Loading: UnusPayWidgets.Loading;
 };
 
-export default DePayWidgets;
+export default UnusPayWidgets;
