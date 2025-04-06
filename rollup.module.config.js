@@ -53,10 +53,10 @@ export default {
       plugins: [
         '@babel/transform-runtime'
       ],
-      exclude: ['node_modules/**','../web3-client/node_modules/**','../web3-wallets/node_modules/**','../web3-payments/node_modules/**','../web3-tokens/node_modules/**','../web3-assets/node_modules/**','../web3-exchanges/node_modules/**'] // only transpile our source code
+      exclude: ['node_modules/**',,'../../node_modules/**'] // only transpile our source code
     }),
     nodeResolve({  browser: true, preferBuiltins: false }),
-    commonjs({ include: ['node_modules/**','../web3-client/node_modules/**','../web3-wallets/node_modules/**','../web3-payments/node_modules/**','../web3-tokens/node_modules/**','../web3-assets/node_modules/**','../web3-exchanges/node_modules/**'],transformMixedEsModules: true,}),
+    commonjs({ include: ['node_modules/**','../../node_modules/**'],transformMixedEsModules: true,}),
     replace({
       'process.env.NODE_ENV': JSON.stringify( 'production' ),
       preventAssignment: true
