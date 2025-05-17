@@ -226,7 +226,7 @@ export default (props)=>{
         body: JSON.stringify(performedPayment)
         
       }).then(response=>response.json()).then((response)=>{
-        if(response.code == 200) {
+        if(response.code == 200&&response.data.status==="success") {
             handlePollingResponse(response.data)
         } 
       })
