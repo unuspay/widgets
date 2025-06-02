@@ -56,7 +56,7 @@ export default (props)=>{
   const { navigate, set } = useContext(NavigateContext)
 
   /* const openSocket = (transaction)=>{
-    let socket = new WebSocket('wss://integrate.depay.com/cable')
+    let socket = new WebSocket('wss://integrate.unuspay.com/cable')
     socket.onopen = async function(event) {
       const msg = {
         command: 'subscribe',
@@ -207,7 +207,7 @@ export default (props)=>{
 
     if(configurationId) {
       if(attemptId) {
-        fetch(`https://public.depay.com/attempts/${attemptId}`, {
+        fetch(`https://public.unuspay.com/attempts/${attemptId}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         }).then((response)=>{
@@ -249,7 +249,7 @@ export default (props)=>{
   }, [polling, transaction, afterBlock, attemptId, paymentRoute])
 
   /* const storePayment = async(transaction, afterBlock, paymentRoute, deadline)=>{
-    fetch('https://public.depay.com/payments', {
+    fetch('https://public.unuspay.com/payments', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({

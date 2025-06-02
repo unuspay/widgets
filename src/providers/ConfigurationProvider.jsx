@@ -39,7 +39,7 @@ export default (props)=>{
     }
     const retry = ()=>{ setTimeout(()=>loadConfiguration(id, attempt+1), 1000) }
     fetch(
-      `https://public.depay.com/configurations/${id}`,
+      `https://public.unuspay.com/configurations/${id}`,
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },

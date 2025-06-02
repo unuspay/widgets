@@ -159,7 +159,7 @@ export default ()=>{
             <div className="CardBody">
               <div className="CardBodyWrapper">
                 <div className="Opacity05">
-                  Confirm in your wallet (<a href={ link({ url: "https://depay.com/docs/payments/verify", target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>verify</a>)
+                  Confirm in your wallet (<a href={ link({ url: "https://unuspay.com/docs/payments/verify", target: '_blank', wallet }) } target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>verify</a>)
                 </div>
               </div>
             </div>

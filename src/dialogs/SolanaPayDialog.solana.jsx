@@ -97,7 +97,7 @@ export default (props)=> {
 
   const sendTrackingAsConfigured = ({ payment, resolve, reject })=>{
     if(configurationId){
-        return fetch(`https://public.depay.com/configurations/${configurationId}/attempts`, {
+        return fetch(`https://public.unuspay.com/configurations/${configurationId}/attempts`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payment)
@@ -178,9 +178,9 @@ export default (props)=> {
     })
   }
 
-  const openSolanaPayTransactionSocket = (secretId, selectedPaymentOption)=>{
+  /* const openSolanaPayTransactionSocket = (secretId, selectedPaymentOption)=>{
     if(solanaPayTransactionSocket) { solanaPayTransactionSocket.close() }
-    const socket = new WebSocket('wss://integrate.depay.com/cable')
+    const socket = new WebSocket('wss://integrate.unuspay.com/cable')
     setSolanaPayTransactionSocket(socket)
 
     socket.onopen = async (event)=> {
@@ -218,7 +218,7 @@ export default (props)=> {
       const item = JSON.parse(event.data)
       if(item.type === "ping" || !item.message) { return }
       if(item.message.created === true) {
-        traceAndContinue(secretId, selectedPaymentOption, `solana:https://public.depay.com/solana/${secretId}`)
+        traceAndContinue(secretId, selectedPaymentOption, `solana:https://public.unuspay.com/solana/${secretId}`)
       } else if (item.message.scanned) {
         setClosable("Are you sure you want to abort this payment?")
         setState('pay')
@@ -300,7 +300,7 @@ export default (props)=> {
 
   const openPaymentValidationSocket = (transaction)=>{
     if(paymentValidationSocket) { paymentValidationSocket.close() }
-    const socket = new WebSocket('wss://integrate.depay.com/cable')
+    const socket = new WebSocket('wss://integrate.unuspay.com/cable')
     setPaymentValidationSocket(socket)
     
     socket.onopen = async function(event) {
@@ -347,7 +347,7 @@ export default (props)=> {
       console.log('WebSocket Error: ', error)
     }
   }
-
+ */
   const pollStatus = (transaction)=>{
     const payment = {
       blockchain: 'solana',
@@ -375,7 +375,7 @@ export default (props)=> {
 
     if(configurationId) {
       if(attemptId) {
-        fetch(`https://public.depay.com/attempts/${attemptId}`, {
+        fetch(`https://public.unuspay.com/attempts/${attemptId}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         }).then((response)=>{
@@ -470,7 +470,7 @@ export default (props)=> {
   }
 
   const storePayment = async(transaction)=>{
-    fetch('https://public.depay.com/payments', {
+    fetch('https://public.unuspay.com/payments', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({

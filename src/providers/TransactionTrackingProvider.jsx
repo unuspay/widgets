@@ -18,7 +18,7 @@ export default (props)=>{
   useEffect(()=>{
     if(polling) {
       let poll = ()=> {
-        fetch(`https://public.depay.com/transactions/${givenTransaction.blockchain}/${givenTransaction.from}/${givenTransaction.nonce}`)
+        fetch(`https://app.unuspay.com/transactions/${givenTransaction.blockchain}/${givenTransaction.from}/${givenTransaction.nonce}`)
           .then((response)=>{
             if(response.status == 200) {
               response.json().then((data)=>{
@@ -43,7 +43,7 @@ export default (props)=>{
     if(attempt > 3) {
       return
     }
-    fetch('https://public.depay.com/transactions', {
+    fetch('https://public.unuspay.com/transactions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -67,7 +67,7 @@ export default (props)=>{
   }
 
   const openSocket = (transaction)=>{
-    let socket = new WebSocket('wss://integrate.depay.com/cable')
+    let socket = new WebSocket('wss://integrate.unuspay.com/cable')
     socket.onopen = async function(event) {
       const msg = {
         command: 'subscribe',

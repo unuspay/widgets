@@ -102,11 +102,15 @@ export default (props)=> {
   }
 
   const searchTokens = useCallback(debounce((term, blockchainName)=>{
-    fetch(`https://public.depay.com/tokens/search?blockchain=${blockchainName}&term=${term}`).then((response)=>{
+    fetch(`https://app.unuspay.com/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{
       if(response.status == 200) {
-        response.json().then((tokens)=>{
-          setTokens(tokens)
-          setLoading(false)
+        response.json().then((json)=>{
+            if(json.code==200){
+            setTokens(json.data)
+            setLoading(false)
+          }else{
+            reject();
+          }
         }).catch(()=>reject)
       } else { reject() }
     }).catch(()=>reject)
@@ -129,7 +133,7 @@ export default (props)=> {
         token.name(),
         token.symbol(),
         token.decimals(),
-        fetch(`https://public.depay.com/tokens/routable/${blockchain.name}/${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }),
+        fetch(`https://app.unuspay.com/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
       ]).then(([name, symbol, decimals, routable])=>{
         setTokens([{
           name,
@@ -137,7 +141,7 @@ export default (props)=> {
           decimals,
           address: term,
           blockchain: blockchain.name,
-          routable: !!routable,
+          routable: true,
         }])
         setLoading(false)
       })
@@ -153,7 +157,7 @@ export default (props)=> {
         token.name(),
         token.symbol(),
         token.decimals(),
-        fetch(`https://public.depay.com/tokens/routable/${blockchain.name}/${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }),
+        fetch(`https://app.unuspay.com/api/public/tokens/${blockchain.name}/${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
       ]).then(([name, symbol, decimals, routable])=>{
         setTokens([{
           name,
@@ -161,7 +165,7 @@ export default (props)=> {
           decimals,
           address: term,
           blockchain: blockchain.name,
-          routable: !!routable,
+          routable: true,
         }])
         setLoading(false)
       })
