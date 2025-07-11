@@ -324,6 +324,7 @@ export default (props)=>{
             amount: paymentRoute.fromAmount.toString(),
             swapToToken: paymentRoute.toToken.address,
             swapToDecimals: paymentRoute.toDecimals,
+            swapToAmount: paymentRoute.toAmount.toString(),
         }],
         toTokens:[{
             token: paymentRoute.toToken.address,
