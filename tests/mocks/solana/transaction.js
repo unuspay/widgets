@@ -6,7 +6,7 @@ const getPaymentsAccountPublicKey = async({ fromAddress })=> {
   let seeds = [Buffer.from("payments"), new PublicKey(fromAddress).toBuffer()]
 
   let [ pdaPublicKey ] = await PublicKey.findProgramAddress(
-    seeds, new PublicKey('DePayRG7ZySPWzeK9Kvq7aPeif7sdbBZNh6DHcvNj7F7')
+    seeds, new PublicKey('UnusPayRG7ZySPWzeK9Kvq7aPeif7sdbBZNh6DHcvNj7F7')
   )
 
   return pdaPublicKey

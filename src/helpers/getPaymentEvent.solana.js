@@ -7,7 +7,7 @@ export default (logs)=>{
   let paymentEvent
   logs.forEach((log, index)=>{
     if(paymentEvent == undefined) {
-      if(log.match('Program DePayRG7ZySPWzeK9Kvq7aPeif7sdbBZNh6DHcvNj7F7 consumed')) {
+      if(log.match('Program UnusPayRG7ZySPWzeK9Kvq7aPeif7sdbBZNh6DHcvNj7F7 consumed')) {
         const paymentEventLog = logs[index-1]
         if(paymentEventLog.match('Program data: ')) {
           try {

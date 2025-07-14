@@ -1,6 +1,6 @@
 {
   "name": "@depay/widgets-solana",
-  "moduleName": "DePayWidgets",
+  "moduleName": "UnusPayWidgets",
   "version": "12.18.3",
   "description": "Web3 Payments with any token. UnusPay simplifies and improves Web3 Payments with the power of DeFi. Accept any token with on-the-fly conversion.",
   "main": "./dist/umd/index.js",

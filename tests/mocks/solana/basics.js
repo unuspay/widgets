@@ -67,7 +67,7 @@ export default async({
   exchange = Exchanges[blockchain][exchange]
 
   fetchMock.get({
-    url: `https://public.depay.com/accounts/${blockchain}/${fromAddress}/assets`,
+    url: `https://app.unuspay.com/accounts/${blockchain}/${fromAddress}/assets`,
     overwriteRoutes: true
   }, fromAddressAssets)
 
@@ -75,18 +75,18 @@ export default async({
 
   if(currencyToUSD) {
     fetchMock.get({
-      url: `https://public.depay.com/currencies/${currency}`,
+      url: `https://app.unuspay.com/currencies/${currency}`,
       overwriteRoutes: true
     }, currencyToUSD.toString())
   }
 
   fetchMock.post({
-    url: `https://public.depay.com/transactions`,
+    url: `https://app.unuspay.com/transactions`,
     overwriteRoutes: true
   }, { status: 201 })
 
   fetchMock.get({
-    url: `https://public.depay.com/transactions/${blockchain}/${fromAddress}/0`,
+    url: `https://app.unuspay.com/transactions/${blockchain}/${fromAddress}/0`,
     overwriteRoutes: true
   }, { status: 404 })
 

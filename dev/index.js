@@ -3,7 +3,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('depay-react-dialog-stack'), require('depay-web3-wallets'), require('react-dom'), require('depay-react-shadow-dom'), require('depay-web3-client'), require('depay-web3-constants'), require('ethers'), require('depay-web3-payments'), require('depay-local-currency'), require('depay-web3-exchanges'), require('depay-web3-tokens'), require('react-rangeslider'), require('depay-react-token-image'), require('depay-web3-blockchains')) :
   typeof define === 'function' && define.amd ? define(['react', 'depay-react-dialog-stack', 'depay-web3-wallets', 'react-dom', 'depay-react-shadow-dom', 'depay-web3-client', 'depay-web3-constants', 'ethers', 'depay-web3-payments', 'depay-local-currency', 'depay-web3-exchanges', 'depay-web3-tokens', 'react-rangeslider', 'depay-react-token-image', 'depay-web3-blockchains'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.DePayWidgets = factory(global.React, global.ReactDialogStack, global.Web3Wallets, global.ReactDOM, global.ReactShadowDOM, global.Web3Client, global.Web3Constants, global.ethers, global.Web3Payments, global.LocalCurrency, global.Web3Exchanges, global.Web3Tokens, global.ReactRangeslider, global.ReactTokenImage, global.Web3Blockchains));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.UnusPayWidgets = factory(global.React, global.ReactDialogStack, global.Web3Wallets, global.ReactDOM, global.ReactShadowDOM, global.Web3Client, global.Web3Constants, global.ethers, global.Web3Payments, global.LocalCurrency, global.Web3Exchanges, global.Web3Tokens, global.ReactRangeslider, global.ReactTokenImage, global.Web3Blockchains));
 }(this, (function (React, depayReactDialogStack, depayWeb3Wallets, ReactDOM, depayReactShadowDom, depayWeb3Client, depayWeb3Constants, ethers, depayWeb3Payments, depayLocalCurrency, depayWeb3Exchanges, depayWeb3Tokens, Slider, depayReactTokenImage, depayWeb3Blockchains) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -1637,7 +1637,7 @@
         rel: "noopener noreferrer",
         target: "_blank",
         className: "FooterLink"
-      }, "by DePay"))));
+      }, "by UnusPay"))));
     } else {
       return /*#__PURE__*/React__default$1['default'].createElement(ErrorContext.Provider, {
         value: {
@@ -4151,7 +4151,7 @@
     };
   }();
 
-  var DePayWidgets = {
+  var UnusPayWidgets = {
     Connect: Connect,
     Payment: Payment,
     Sale: Sale,
@@ -4159,6 +4159,6 @@
     provider: depayWeb3Client.provider
   };
 
-  return DePayWidgets;
+  return UnusPayWidgets;
 
 })));

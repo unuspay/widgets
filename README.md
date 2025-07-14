@@ -20,10 +20,10 @@ or
 npm install @depay/widgets --save
 ```
 
-and load the DePayWidgets package wherever you need it:
+and load the UnusPayWidgets package wherever you need it:
 
 ```
-import DePayWidgets from '@depay/widgets'
+import UnusPayWidgets from '@depay/widgets'
 ```
 
 Make sure you install DePay widgets peer dependencies, too, in case your project does not have them installed already:
@@ -49,7 +49,7 @@ yarn add @depay/widgets-evm
 ```
 
 ```javascript
-import DePayWidgets from '@depay/widgets-evm'
+import UnusPayWidgets from '@depay/widgets-evm'
 ```
 
 ### Solana platform specific packaging
@@ -59,7 +59,7 @@ yarn add @depay/widgets-solana
 ```
 
 ```javascript
-import DePayWidgets from '@depay/widgets-solana'
+import UnusPayWidgets from '@depay/widgets-solana'
 ```
 
 ## Server-side rendering
@@ -97,7 +97,7 @@ https://depayfi.github.io/widgets/demo.bundle.html
 
 DePay supports [most crypto wallets](https://depay.com/wallets).
 
-## DePayWidgets: Payments
+## UnusPayWidgets: Payments
 
 DePay Payments allows you to accept and perform crypto payments.
 
@@ -108,7 +108,7 @@ DePay Payments allows you to accept and perform crypto payments.
 Connects the widget to a DePay integration managed via https://app.depay.com:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   integration: 'fe690fbc-1740-4894-b12c-23a72abec54d'
 })
 ```
@@ -123,7 +123,7 @@ If your integration relies on processing dynamic from your backend (e.g. pricing
 you need to pass the data that is supposed to be forwarded to your backend for dynamic configurations to the widget:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   integration: 'fe690fbc-1740-4894-b12c-23a72abec54d',
   payload: {
     whatever: 'you want to forward to your backend for dynamic configurations'
@@ -147,7 +147,7 @@ to your backend in order to receive a payment configuration for the widget.
 ### Configuration
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   accept: [{
     blockchain: 'ethereum',
     amount: 20,
@@ -160,7 +160,7 @@ DePayWidgets.Payment({
 You can also accept multiple payments on multiple blockchains:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   accept: [
     { // 20 USDT on ethereum
       blockchain: 'ethereum',
@@ -286,7 +286,7 @@ The fee will be taken from the target token and target amount (after swap, depen
 `receiver`: The address that is supposed to receive the fee.
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   accept: [
     {...
 
@@ -306,7 +306,7 @@ In case where you want to configure payments based on the source token + amount,
 In those cases make sure to NOT configure `token` nor `amount`!
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   accept: [{
     blockchain: 'bsc',
     fromToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
@@ -328,7 +328,7 @@ Typically right after the users connects his wallet, or in cases the user has hi
 ```javascript
 let address = '0x4aD374e0836c26BeC213a19D3e030F8b3A8AcDE4' // e.g. retrieve it right when you perform wallet connect
 
-DePayWidgets.Payment.preload({
+UnusPayWidgets.Payment.preload({
   account: address,
   accept: [
     {
@@ -353,7 +353,7 @@ DePayWidgets.Payment.preload({
 Allows you to change the title of the widget:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   title: 'Donation'
 
@@ -368,7 +368,7 @@ DePayWidgets.Payment({
 Allows to track payments via any backend endpoint.
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     endpoint: '/track/payments'
@@ -424,7 +424,7 @@ BODY:
 Alternatively you can pass a method to track that performs the tracking request to your backend if you need to handle the request yourself (e.g. to add additional headers etc.):
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     method: async (payment)=>{
@@ -442,7 +442,7 @@ DePayWidgets.Payment({
 ```
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     method: (payment)=>axios('/track/payments', payment)
@@ -465,7 +465,7 @@ For user flows where you can release the user immediately, we recommend performi
 You can configure the widget to track/validate the payment asynchronously:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     endpoint: '/track',
@@ -499,7 +499,7 @@ as the entire reason for polling is to cover cases where websockets fail and the
 If you use a method for additional polling, make sure you return a promise. Polling will continue as long as you resolve this promise with anything that resolves to true:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     poll: {
@@ -520,7 +520,7 @@ DePayWidgets.Payment({
 ```
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   track: {
     poll: {
@@ -542,7 +542,7 @@ A function that will be called once the user connects a wallet.
 This function will be called with the connected wallet address as the main argument:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   connected: (address)=> {
     // do something with the address
@@ -558,7 +558,7 @@ DePayWidgets.Payment({
 A function that will be called once the user closes the widget (no matter if before or after the payment).
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   closed: ()=> {
     // do something if user closed the widget
@@ -576,7 +576,7 @@ A function that will be called before the payment is handed over to the wallet.
 Allows you to stop the payment if this method returns false.
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   before: async (payment, from)=> {
     alert('Something went wrong')
@@ -594,7 +594,7 @@ A function that will be called once the payment has been sent to the network (bu
 The widget will call this function with a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details about the structure)
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   sent: (transaction)=> {
     // called when payment transaction has been sent to the network
@@ -611,7 +611,7 @@ A function that will be called once the payment has succeeded on the network (ch
 The widget will call this function passing a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details)
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   succeeded: (transaction, payment)=> {
     // called when payment transaction has been confirmed once by the network
@@ -629,7 +629,7 @@ DePayWidgets.Payment({
 A function that will be called once the payment has been validated by DePay.
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   validated: (successful, transaction, payment)=> {
     // successful (true or false)
@@ -648,7 +648,7 @@ A function that will be called if the payment execution failed on the blockchain
 The widget will call this function passing a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details)
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   failed: (transaction, error, payment)=> {
     // called when payment transaction failed on the blockchain
@@ -667,7 +667,7 @@ DePayWidgets.Payment({
 A function that will be called if the widget throws a critical internal error that it can't handle and display on its own:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   critical: (error)=> {
     // render and display the error with error.toString()
@@ -682,7 +682,7 @@ DePayWidgets.Payment({
 A function that will be called if the widget throws a non-critical internal error that it can and will handle and display on its own:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   error: (error)=> {
     // maybe do some internal tracking with error.toString()
@@ -698,9 +698,9 @@ DePayWidgets.Payment({
 Allows to pass an already connected wallet instance (to skip the "Connect Wallet" flow):
 
 ```javascript
-let { wallet } = DePayWidgets.Connect({})
+let { wallet } = UnusPayWidgets.Connect({})
 
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   wallet: wallet
 
@@ -712,7 +712,7 @@ DePayWidgets.Payment({
 Allows to set providers to be used for making RPC calls to the individual blockchains:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   providers: {
     ethereum: ['http://localhost:8545'],
@@ -728,7 +728,7 @@ Allows you to enforce displayed local currency (instead of automatically detecti
 
 ```javascript
 
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
 
   currency: 'USD'
 
@@ -741,7 +741,7 @@ DePayWidgets.Payment({
 Allows only the configured tokens to be eligible as means of payment (from the sender):
 
 ```javacript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   whitelist: {
     ethereum: [
@@ -769,7 +769,7 @@ DePayWidgets.Payment({
 Allows to blacklist tokens so that they will not be suggested as means of payment (from the sender):
 
 ```javacript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   blacklist: {
     ethereum: [
@@ -806,7 +806,7 @@ DePayWidgets.Payment({
 Allows you to pass a container element that is supposed to contain the widget:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   container: document.getElementById('my-container')
 })
 ```
@@ -821,7 +821,7 @@ let CustomComponentWithWidget = (props)=>{
 
     useEffect(()=>{
       if(container.current) {
-        DePayWidgets.Payment({ ...defaultArguments, document,
+        UnusPayWidgets.Payment({ ...defaultArguments, document,
           container: container.current
         })
       }
@@ -840,7 +840,7 @@ let CustomComponentWithWidget = (props)=>{
 Allows you to change the style of the widget.
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   style: {
     colors: {
       primary: '#ffd265',
@@ -867,7 +867,7 @@ DePayWidgets.Payment({
 Allows you to set color values:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   style: {
     colors: {
@@ -887,7 +887,7 @@ DePayWidgets.Payment({
 Allows you to set the font-family:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   style: {
     fontFamily: '"Cardo", serif !important'
@@ -902,7 +902,7 @@ DePayWidgets.Payment({
 Allows you to inject CSS:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   
   style: {
     css: `
@@ -923,7 +923,7 @@ DePayWidgets.Payment({
 Allows you to unmount (the React safe way) the entire widget from the outside:
 
 ```javascript
-let { unmount } = await DePayWidgets.Payment({})
+let { unmount } = await UnusPayWidgets.Payment({})
 
 unmount()
 ```
@@ -935,7 +935,7 @@ unmount()
 Allows you to recover a previously made payment. E.g. useful if you need to continue to show a pending payment progress if user rearrives or reloads a payment page:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   recover: {
     blockchain: 'ethereum',
     transaction: '0x081ae81229b2c7df586835e9e4c16aa89f8a15dc118fac31b7521477c53ed2a9',
@@ -958,20 +958,20 @@ A recovered payment still results in a confirmed or failed payment, and also cal
 Makes the widget unclosable:
 
 ```javascript
-DePayWidgets.Payment({
+UnusPayWidgets.Payment({
   closable: false
 })
 
 ```
 
-## DePayWidgets: Sale
+## UnusPayWidgets: Sale
 
 DePay Sales allows you to sell tokens directly from your website or dApp with automatic any-to-any payment conversion (so people can use any token when buying your token directly off your website or dApp).
 
 ### Quick start
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   sell: {
     'ethereum': '0xa0bEd124a09ac2Bd941b10349d8d224fe3c955eb'
   }
@@ -980,10 +980,10 @@ DePayWidgets.Sale({
 
 ### Configuration
 
-You need to pass a configuration object to `DePayWidgets.Sale` which needs to at least contain the `sell` field:
+You need to pass a configuration object to `UnusPayWidgets.Sale` which needs to at least contain the `sell` field:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   sell: {
     'ethereum': '0xa0bEd124a09ac2Bd941b10349d8d224fe3c955eb'
   }
@@ -993,7 +993,7 @@ DePayWidgets.Sale({
 You can also sell on multiple blockchains:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   sell: {
     'ethereum': '0xa0bEd124a09ac2Bd941b10349d8d224fe3c955eb',
     'bsc': '0xa0bEd124a09ac2Bd941b10349d8d224fe3c955eb'
@@ -1021,7 +1021,7 @@ alongside values for `start`, `min` and `step`.
 `token`: Set to `true` if you want amount selection to be denominated in the token you're selling, e.g.:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   sell: {...},
   amount: {
     token: true
@@ -1038,7 +1038,7 @@ A function that will be called once the user connects a wallet.
 Will be called with the connected wallet address as the main argument:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   connected: (address)=> {
     // do something with the address
@@ -1053,7 +1053,7 @@ DePayWidgets.Sale({
 A function that will be called once the user closes the widget (no matter if before or after the payment).
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   closed: ()=> {
     // do something if user closed the widget
@@ -1070,7 +1070,7 @@ A function that will be called once the payment has been sent to the network (bu
 The widget will call this function with a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details)
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   sent: (transaction)=> {
     // called when payment transaction has been sent to the network
@@ -1087,7 +1087,7 @@ A function that will be called once the payment has succeeded on the network (ch
 The widget will call this function passing a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details)
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   succeeded: (transaction)=> {
     // called when payment transaction has been confirmed once by the network
@@ -1104,7 +1104,7 @@ A function that will be called if the payment execution failed on the blockchain
 The widget will call this function passing a transaction as single argument (see: [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets#transaction) for more details)
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   failed: (transaction)=> {
     // called when payment transaction failed on the blockchain
@@ -1120,7 +1120,7 @@ DePayWidgets.Sale({
 A function that will be called if the widget throws a critical internal error that it can't handle and display on its own:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   critical: (error)=> {
     // render and display the error with error.toString()
@@ -1135,7 +1135,7 @@ DePayWidgets.Sale({
 A function that will be called if the widget throws a non-critical internal error that it can and will handle and display on its own:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   error: (error)=> {
     // maybe do some internal tracking with error.toString()
@@ -1149,7 +1149,7 @@ DePayWidgets.Sale({
 Allows to set providers to be used for making RPC calls to the individual blockchains:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   providers: {
     ethereum: ['http://localhost:8545'],
@@ -1163,7 +1163,7 @@ DePayWidgets.Sale({
 Allows you to enforce displayed local currency (instead of automatically detecting it):
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
 
   currency: 'USD'
 
@@ -1175,7 +1175,7 @@ DePayWidgets.Sale({
 Allows to blacklist tokens so that they will not be suggested as means of payment (from the sender):
 
 ```javacript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   blacklist: {
     ethereum: [
@@ -1212,7 +1212,7 @@ DePayWidgets.Sale({
 Allows to set the token image used in the widget to represent the purchased token:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   tokenImage: 'https://depay.com/favicon.png'
 
@@ -1226,7 +1226,7 @@ DePayWidgets.Sale({
 Allows you to change the style of the widget.
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   style: {
     colors: {
@@ -1254,7 +1254,7 @@ DePayWidgets.Sale({
 Allows you to set color values:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   style: {
     colors: {
@@ -1274,7 +1274,7 @@ DePayWidgets.Sale({
 Allows you to set the font-family:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   style: {
     fontFamily: '"Cardo", serif !important'
@@ -1289,7 +1289,7 @@ DePayWidgets.Sale({
 Allows you to inject CSS:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   
   style: {
     css: `
@@ -1310,7 +1310,7 @@ DePayWidgets.Sale({
 Allows you to unmount (the React safe way) the entire widget from the outside:
 
 ```javascript
-let { unmount } = await DePayWidgets.Sale({})
+let { unmount } = await UnusPayWidgets.Sale({})
 
 unmount()
 ```
@@ -1322,7 +1322,7 @@ unmount()
 Makes the widget unclosable:
 
 ```javascript
-DePayWidgets.Sale({
+UnusPayWidgets.Sale({
   closable: false
 })
 
@@ -1335,7 +1335,7 @@ DePay Connect allows you to have your users connect their crypto wallet to your 
 Returns connected `account` and `wallet` in return. 
 
 ```javascript
-let { account, wallet }  = await DePayWidgets.Connect()
+let { account, wallet }  = await UnusPayWidgets.Connect()
 ```
 
 See [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets) for more details about the returned `wallet`.
@@ -1346,7 +1346,7 @@ See [depay-web3-wallets](https://github.com/depayfi/depay-web3-wallets) for more
 
 ```javascript
 
-DePayWidgets.Connect().then(()=>{}).catch((error)=>{
+UnusPayWidgets.Connect().then(()=>{}).catch((error)=>{
   error // "USER_CLOSED_DIALOG"
 })
 
@@ -1360,7 +1360,7 @@ Returns `account` if successfully signed and recovered log in message.
 
 ```javascript
 let message = "Sign to login"
-let { account, wallet } = await DePayWidgets.Login({ message })
+let { account, wallet } = await UnusPayWidgets.Login({ message })
 ```
 
 Connects wallet and instructs connected wallet to sign `message`, afterwards sends `signature` and `message` to `POST /login` (or `endpoint` if defined):
@@ -1394,7 +1394,7 @@ RESPONSE
 ```
 
 
-Which will resolve the `DePayWidgets.Login` request to the resolved account:
+Which will resolve the `UnusPayWidgets.Login` request to the resolved account:
 
 ```javascript
 account // 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
@@ -1403,7 +1403,7 @@ account // 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
 You can also pass a `recover` function that takes care of signature recovery:
 
 ```javascript
-DePayWidgets.Login({ message, recover: ({ message, signature })=>{
+UnusPayWidgets.Login({ message, recover: ({ message, signature })=>{
     return new Promise((resolve, reject)=>{
       fetch('https://example.com/login', {
         method: 'POST',
@@ -1430,7 +1430,7 @@ DePayWidgets.Login({ message, recover: ({ message, signature })=>{
 In case you want to include the wallet account identifier in the to be signed message, pass a callback function returning a string to `message`:
 
 ```javascript
-let { account } = await DePayWidgets.Login({
+let { account } = await UnusPayWidgets.Login({
   message: (account)=>`Click to log in to DePay and to accept DePay's Terms of Service: https://depay.com/legal/terms\n${dateTime}\n${account}`
 })
 console.log("Logged in via signature", account)
@@ -1442,7 +1442,7 @@ console.log("Logged in via signature", account)
 
 ```javascript
 
-DePayWidgets.Login().then(()=>{}).catch((error)=>{
+UnusPayWidgets.Login().then(()=>{}).catch((error)=>{
   error // "USER_CLOSED_DIALOG"
 })
 
@@ -1457,7 +1457,7 @@ DePay Select widget allows you to open a dialog that allows you to select things
 Resolves with what has been selected by the user.
 
 ```javascript
-let token = await DePayWidgets.Select({ what: 'token' })
+let token = await UnusPayWidgets.Select({ what: 'token' })
 
 // {
 //   address: "0xa0bed124a09ac2bd941b10349d8d224fe3c955eb"
@@ -1480,7 +1480,7 @@ This only resolves to a single contract on a single blockchain.
 As NFT collections could span over multiple blockchains, users would need to make one selection per contract address & blockchain.
 
 ```javascript
-let collection = await DePayWidgets.Select({ what: 'nft' })
+let collection = await UnusPayWidgets.Select({ what: 'nft' })
 
 // {
 //    address: "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623",
@@ -1531,7 +1531,7 @@ If the NFT contract is of type 1155 the return will also contain the NFTs id for
 ```javascript
 
 import React from 'react'
-import DePayWidgets from '@depay/widgets'
+import UnusPayWidgets from '@depay/widgets'
 
 export default (props)=>{
 
@@ -1539,7 +1539,7 @@ export default (props)=>{
 
   const openPaymentWidget = async ()=>{
     (
-      { unmount } = await DePayWidgets.Payment({...})
+      { unmount } = await UnusPayWidgets.Payment({...})
     )
   }
 
