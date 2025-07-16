@@ -3,16 +3,16 @@ export default (style)=>{
 
     .Card {
       align-items: center;
-      background: rgb(255,255,255);
+      background: rgb(245, 246, 250);
       border: 1px solid transparent;
-      border-radius: 13px;
+      border-radius: 8px;
       box-shadow: 0 0 8px rgba(0,0,0,0.03);
       cursor: pointer;
       display: flex;
       flex-direction: row;
       margin-bottom: 8px;
-      min-height: 76px;
-      padding: 16px 10px;
+      min-height: 52px;
+      padding: 12px 10px;
       width: 100%;
     }
 
@@ -103,7 +103,7 @@ export default (style)=>{
 
     .Card.small {
       min-height: auto;
-      padding: 8px 8px;
+      padding: 4px 8px;
       margin: 0;
     }
 

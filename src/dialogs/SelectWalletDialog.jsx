@@ -158,9 +158,13 @@ export default (props)=>{
   return(
     <Dialog
       header={
-        <div>
+        <div className="PaddingTopM">
           <div className="PaddingTopS PaddingLeftM PaddingRightM TextLeft PaddingBottomS">
-            <h1 className="LineHeightL FontSizeL">Select a wallet</h1>
+            <h1 className="LineHeightL FontSizeL PaddingBottomS FontWeightMedium">Connect a wallet</h1>
+            <p style={{ fontSize: '14px', color: 'rgba(20, 24, 31, 0.45)', lineHeight: '20px' }}>
+              Some extension wallets may automatically connect to dapps by default. 
+              Please close the extension wallet and then refresh the webpage.
+            </p>
           </div>
           { ((detectedWallets && detectedWallets.length > 0) || previouslyConnectedWallet) &&
             <div className="PaddingBottomXS PaddingLeftS PaddingRightS">
@@ -175,7 +179,7 @@ export default (props)=>{
                     connectionType = 'extension'
                   }
                   return(
-                    <div key={index} className="PaddingBottomXS">
+                    <div key={index} style={{ marginBottom: '8px' }}>
                       <button
                         type="button"
                         className="Card small"
@@ -189,10 +193,10 @@ export default (props)=>{
                         </div>
                         <div className="CardBody">
                           <div className="CardBodyWrapper PaddingLeftXS LineHeightXS">
-                            <div className="CardText FontWeightMedium">
+                            <div style={{ fontSize: '14px', fontWeight: '600' }}>
                               { walletMetaData.name }
                             </div>
-                            <div className="LightGreen"><span className="LightGreen" style={{ fontSize: '70%', top: '-1px', position: 'relative' }}>●</span> Connect detected { connectionType }</div>
+                            <div className="LightGreen" style={{ fontSize: '12px' }}><span className="LightGreen" style={{ fontSize: '12px', top: '-1px', position: 'relative' }}>●</span> Connect detected { connectionType }</div>
                           </div>
                         </div>
                       </button>
@@ -202,7 +206,7 @@ export default (props)=>{
               }
               {
                 previouslyConnectedWallet && !detectedWallets.find((wallet)=>previouslyConnectedWallet.name === (wallet.info ? wallet.info.name : wallet.name)) &&
-                <div className="PaddingBottomXS">
+                <div style={{ marginBottom: '8px' }}>
                   <button
                     type="button"
                     className="Card small"
@@ -216,10 +220,10 @@ export default (props)=>{
                     </div>
                     <div className="CardBody">
                       <div className="CardBodyWrapper PaddingLeftXS LineHeightXS">
-                        <div className="CardText FontWeightMedium">
+                        <div style={{ fontSize: '14px', fontWeight: '600' }}>
                           { previouslyConnectedWallet.name }
                         </div>
-                        <div className="Opacity05"><span style={{ fontSize: '70%', top: '-1px', position: 'relative' }}>●</span> Used previously</div>
+                        <div className="Opacity05" style={{ fontSize: '12px' }}><span style={{ fontSize: '12px', top: '-1px', position: 'relative' }}>●</span> Used previously</div>
                       </div>
                     </div>
                   </button>
@@ -227,28 +231,17 @@ export default (props)=>{
               }
             </div>
           }
-          <div className="PaddingBottomXS PaddingLeftS PaddingRightS PaddingTopXS">
+          <div className="PaddingBottomS PaddingLeftS PaddingRightS PaddingTopXS">
             <div className="Row">
               { allWallets.length > 4 &&
-                <input className="Search" value={ searchTerm } onChange={ (event)=>{ setSearchTerm(event.target.value) } } placeholder="Search by name" ref={ searchElement }/>
+                <input className="Search small" value={ searchTerm } onChange={ (event)=>{ setSearchTerm(event.target.value) } } placeholder="Search by name" ref={ searchElement }/>
               }
             </div>
           </div>
         </div>
       }
       alternativeHeaderAction={
-        <span className="DropDownWrapper">
-          <button type="button" onClick={ ()=>setShowDropDown(!showDropDown) } className="ButtonCircular" title="More options">
-            <MenuIcon/>
-          </button>
-          { showDropDown && <DropDown hide={()=>setShowDropDown(false)}
-            items={[
-              { label: "What is a wallet?", action: ()=>{ navigate('WhatIsAWallet') } },
-              { label: "Wallet missing?", action: ()=>{ window.open('mailto:support@unuspay.com?subject=Add wallet&body=Please enter the name of the wallet you want us to add:', '_blank') } },
-              { label: "Problems connecting?", action: ()=>{ window.open('mailto:support@unuspay.com?subject=Problem connecting wallet&body=Please enter the name of the wallet you have problems with connecting:', '_blank') } },
-            ]}
-          /> }
-        </span>
+        <></>
       }
       bodyClassName={ "PaddingBottomXS" }
       body={

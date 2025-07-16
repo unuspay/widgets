@@ -53,5 +53,9 @@ export default (style)=>{
       font-size: clamp(14px, 2vw, 15px);
       max-width: fit-content;
     }
+
+    .TextColorGrey {
+      color: rgba(20, 24, 31, 0.45);
+    }
   `)
 }

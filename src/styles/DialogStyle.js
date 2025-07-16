@@ -29,7 +29,7 @@ export default (style)=>{
       width: 420px;
       box-shadow: 0 0 22px rgba(0,0,0,0.3);
       border-radius: 13px;
-      background: rgb(248,248,248);
+      background: rgb(255,255,255);
     }
 
     @media (max-width: 450px) {

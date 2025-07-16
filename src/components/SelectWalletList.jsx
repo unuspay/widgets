@@ -37,7 +37,7 @@ export default (props)=>{
   const rowVirtualizer = useVirtualizer({
     count: resultList.length,
     getScrollElement: () => parentElement.current,
-    estimateSize: () => 61,
+    estimateSize: () => 52,
   })
 
   useEffect(()=>{
@@ -86,7 +86,7 @@ export default (props)=>{
                 </div>
                 <div className="CardBody">
                   <div className="CardBodyWrapper PaddingLeftXS LineHeightXS">
-                    <div className="CardText">
+                    <div style={{ fontSize: '14px', fontWeight: '600' }}>
                       { resultList[virtualItem.key].name }
                     </div>
                   </div>
