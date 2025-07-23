@@ -26,9 +26,9 @@ export default (style)=>{
 
     .Card.Row {
       border-radius: 0;
-      margin-bottom: 0;
+      margin-bottom: 5px;
       box-shadow: none;
-      min-height: 69px;
+      min-height: 52px;
       padding: 7px 21px;
       border-top: 1px solid rgba(0,0,0,0.05);
     }

@@ -37,7 +37,7 @@ export default (style)=>{
 
   style = {
     colors: Object.assign({
-      primary: '#ea357a',
+      primary: '#0F62FE',
       buttonText: '#ffffff',
       icons: '#000000',
       text: '#212529',

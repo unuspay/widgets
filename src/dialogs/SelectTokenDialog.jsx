@@ -46,7 +46,7 @@ export default (props)=> {
     let blockchain = Blockchains.findByName(name)
     setBlockchain(blockchain)
     setSelection(Object.assign(props.selection, { blockchain, token: undefined }))
-    setTokens(blockchain.tokens)
+    setTokens(blockchain.tokens.filter((token) => token.symbol !== 'DEPAY'))
   }
 
   useEffect(()=>{
@@ -316,7 +316,7 @@ export default (props)=> {
             </div>
           </div>
           <div className="PaddingTopXS PaddingBottomS">
-            <input value={ searchTerm } autoFocus={ !isMobile() } onBlur={ ()=>setShowAddToken(false) } onChange={ onChangeSearch } className="Search" placeholder="Search name or paste address" ref={searchElement}/>
+            <input value={ searchTerm } autoFocus={ !isMobile() } onBlur={ ()=>setShowAddToken(false) } onChange={ onChangeSearch } className="Search small" placeholder="Search name or paste address" ref={searchElement}/>
             { showAddToken &&
               <div className="PaddingTopXS PaddingRightXS PaddingLeftXS">
                 <div className="Tooltip"> 
