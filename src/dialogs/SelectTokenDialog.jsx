@@ -47,6 +47,15 @@ export default (props)=> {
     setBlockchain(blockchain)
     setSelection(Object.assign(props.selection, { blockchain, token: undefined }))
     setTokens(blockchain.tokens.filter((token) => token.symbol !== 'DEPAY'))
+    if (blockchain.name === 'optimism') {
+      setTokens(blockchain.tokens.filter((token) => token.symbol !== 'DEPAY' && token.symbol !== 'ETH'))
+    }
+    if (blockchain.name === 'base') {
+      setTokens(blockchain.tokens.filter((token) => token.symbol !== 'DEPAY' && token.symbol !== 'DAI'))
+    }
+    if (blockchain.name === 'fantom') {
+      setTokens(blockchain.tokens.filter((token) => token.symbol !== 'DEPAY' && token.symbol !== 'lzUSDC'))
+    }
   }
 
   useEffect(()=>{

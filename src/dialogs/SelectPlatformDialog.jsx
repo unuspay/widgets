@@ -18,7 +18,7 @@ import React, {} from 'react'
 
 export default (props)=>{
 
-  let blockchains = props.wallet.extensions.map((extension)=>wallets[extension].info.blockchains).flat()
+  let blockchains = props.wallet.extensions.map((extension)=>wallets[extension].info.blockchains.filter((blockchain)=>blockchain !== 'solana' && blockchain !== 'worldchain')).flat()
 
   if(props.accept) {
     blockchains = blockchains.filter((blockchain)=>{
