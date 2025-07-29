@@ -202,7 +202,7 @@ export default (props)=> {
               </label>
             </div>
             <div className="PaddingTopXS PaddingBottomS TextLeft">
-              <input id="UnusPayWidgetsEnterNFTImage" name="UnusPayWidgetsEnterNFTImage" value={ image } onChange={ (event)=>setImage(event.target.value) } placeholder={ supported.solana.includes(selection?.blockchain?.name) ? 'https://img-cdn.magiceden.dev/rs:fill:128:128:0:0/plain/https://creator-hub-prod.s3.us-east-2.amazonaws.com/smb_gen3_pfp_1688353503184.png' : 'https://i.seadn.io/gae/BdxvLseXcfl57BiuQcQYdJ64v-aI8din7WPk0Pgo3qQFhAUH-B6i-dCqqc_mCkRIzULmwzwecnohLhrcH8A9mpWIZqA7ygc52Sr81hE?auto=format&w=128' } className="InputField small" />
+              <input id="UnusPayWidgetsEnterNFTImage" name="UnusPayWidgetsEnterNFTImage" value={ image } onChange={ (event)=>setImage(event.target.value) }  className="InputField small" />
             </div>
           </div>
           <div>
