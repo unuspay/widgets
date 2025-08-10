@@ -18,7 +18,7 @@ export default (props)=>{
   useEffect(()=>{
     if(polling) {
       let poll = ()=> {
-        fetch(`https://app.unuspay.com/transactions/${givenTransaction.blockchain}/${givenTransaction.from}/${givenTransaction.nonce}`)
+        fetch(`process.env.UNUSPAY_BASE_URL/transactions/${givenTransaction.blockchain}/${givenTransaction.from}/${givenTransaction.nonce}`)
           .then((response)=>{
             if(response.status == 200) {
               response.json().then((data)=>{

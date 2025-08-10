@@ -28,6 +28,8 @@
   "scripts": {
     "build": "npx rollup --config rollup.module.config.js ",
     "build:bundle": "npx rollup --config rollup.module.config.js && npx rollup --config rollup.bundle.config.js ",
+    "build:uat": "npx rollup --config rollup.module.config.uat.js ",
+    "build:bundleUat": "npx rollup --config rollup.module.config.uat.js && npx rollup --config rollup.bundle.config.js ",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\" --ignore-pattern \"**/*.d.ts\"",
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix --ignore-pattern \"**/*.d.ts\"",
     "format": "prettier src --write",

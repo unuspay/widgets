@@ -59,7 +59,7 @@ export default {
     commonjs({ include: ['node_modules/**','../../node_modules/**','../web3-wallets/node_modules/**','../web3-payments/node_modules/**'],transformMixedEsModules: true,}),
     replace({
       'process.env.NODE_ENV': JSON.stringify( 'production' ),
-      'process.env.UNUSPAY_BASE_URL': 'https://dapp.unuspay.com',
+      'process.env.UNUSPAY_BASE_URL': 'https://app.unuspay.com',
       preventAssignment: true
     })
   ]

@@ -664,7 +664,7 @@ export default (props)=> {
           <div className="PaddingTopXS PaddingRightM PaddingLeftM PaddingBottomM">
             <button className='ButtonPrimary' onClick={()=>{
               setState('wait')
-              traceAndContinue(secretId, selectedPaymentOption, `solana:https://app.unuspay.com/solana/${secretId}`)
+              traceAndContinue(secretId, selectedPaymentOption, `solana:process.env.UNUSPAY_BASE_URL/solana/${secretId}`)
             }}>
               Try again
             </button>

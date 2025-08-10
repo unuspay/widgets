@@ -111,7 +111,7 @@ export default (props)=> {
   }
 
   const searchTokens = useCallback(debounce((term, blockchainName)=>{
-    fetch(`https://app.unuspay.com/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{
+    fetch(`process.env.UNUSPAY_BASE_URL/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{
       if(response.status == 200) {
         response.json().then((json)=>{
             if(json.code==200){
@@ -142,7 +142,7 @@ export default (props)=> {
         token.name(),
         token.symbol(),
         token.decimals(),
-        fetch(`https://app.unuspay.com/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
+        fetch(`process.env.UNUSPAY_BASE_URL/api/public/tokens?blockchain=${blockchainName}&symbol=${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
       ]).then(([name, symbol, decimals, routable])=>{
         setTokens([{
           name,
@@ -166,7 +166,7 @@ export default (props)=> {
         token.name(),
         token.symbol(),
         token.decimals(),
-        fetch(`https://app.unuspay.com/api/public/tokens/${blockchain.name}/${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
+        fetch(`process.env.UNUSPAY_BASE_URL/api/public/tokens/${blockchain.name}/${term}`).then((response)=>{ if(response.status == 200) { return response.json() } }).then((json)=>{if(json.code==200){return json.data}}),
       ]).then(([name, symbol, decimals, routable])=>{
         setTokens([{
           name,
